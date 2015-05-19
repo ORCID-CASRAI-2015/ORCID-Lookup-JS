@@ -27,7 +27,7 @@
 		});
               $( "#search" ).on( "autocompleteselect", function( event, ui ) {
             	    //alert(ui.item.value);
-            	    search = ui.item.label;
+            	    search = (ui.item.label.split(" # "))[0];
             	    profile = ui.item.value;
             	    $("#search").val(search);
             	    $("#profile").val(profile);

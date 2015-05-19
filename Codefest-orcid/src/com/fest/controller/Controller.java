@@ -44,8 +44,11 @@ public class Controller extends HttpServlet {
         final String param = request.getParameter("term");
         final List<OrcidDesc> result = new ArrayList<OrcidDesc>();
         for(OrcidSearchResult res : searchRes.getOrcidSearchResult()) {
-            if (res.getOrcidProfile().retrieveOrcidPath().startsWith(param) && !res.getOrcidProfile().retrieveOrcidPath().equals(loginOrcid)) {
-                result.add(new OrcidDesc(res.getOrcidProfile().retrieveOrcidPath().toString(), res.getOrcidProfile().toString()));
+        	StringBuffer label = new StringBuffer(res.getOrcidProfile().retrieveOrcidPath()).append(" # ")
+        			.append(res.getOrcidProfile().getOrcidBio().getPersonalDetails().getGivenNames().getContent())
+        			.append(" # ").append(res.getOrcidProfile().getOrcidBio().getContactDetails().getAddress().getCountry().getValue());
+            if (label.toString().contains(param) && !res.getOrcidProfile().retrieveOrcidPath().equals(loginOrcid)) {
+            	result.add(new OrcidDesc(label.toString(), res.getOrcidProfile().toString()));
             }
         }
         response.getWriter().write(new Gson().toJson(result));
