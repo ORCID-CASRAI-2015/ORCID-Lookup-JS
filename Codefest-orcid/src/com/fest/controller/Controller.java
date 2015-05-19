@@ -48,7 +48,7 @@ public class Controller extends HttpServlet {
         			.append(res.getOrcidProfile().getOrcidBio().getPersonalDetails().getGivenNames().getContent())
         			.append(" # ").append(res.getOrcidProfile().getOrcidBio().getContactDetails().getAddress().getCountry().getValue());
             if (label.toString().contains(param) && !res.getOrcidProfile().retrieveOrcidPath().equals(loginOrcid)) {
-            	result.add(new OrcidDesc(label.toString(), res.getOrcidProfile().toString()));
+            	result.add(new OrcidDesc(label.toString(), res.getOrcidProfile()));
             }
         }
         response.getWriter().write(new Gson().toJson(result));
