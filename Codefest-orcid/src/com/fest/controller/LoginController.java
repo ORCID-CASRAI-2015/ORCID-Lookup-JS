@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +13,7 @@ import org.orcid.jaxb.model.message.OrcidSearchResults;
 
 import com.fest.dao.SourceDao;
 import com.fest.utils.Constants;
+import com.fest.utils.PropertiesUtil;
 
 /**
  * Servlet implementation class LoginServlet
@@ -41,7 +41,7 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		OrcidSearchResults searchRes = null;
-		String myDoi = "123123"; // Belongs to another 2 users in sandbox.
+		String myDoi = new PropertiesUtil().loadPropertiesFile("db.properties").getProperty("user-work-doi"); // Belongs to another 2 users in sandbox.
 		StringBuffer searchAPI = new StringBuffer(Constants.BASE_URI).append("search/orcid-bio/?q=digital-object-ids:").append(myDoi);
 		HttpSession session = request.getSession();
 		try {

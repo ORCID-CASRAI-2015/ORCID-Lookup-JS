@@ -10,8 +10,10 @@
 </head>
 <body>
 <form action="/Codefest-orcid/loginController" method = "POST">
-----------------------------ORCID FEST---------------------------<br><br>
-	<input type = "submit" name = "submit" value = "Login" />
+ <div class="ui-widget">
+	----------------------------Welcome User---------------------------<br><br>
+		<input type = "submit" name = "submit" value = "Search" />
+</div>
 </form>
 </body>
 </html>
